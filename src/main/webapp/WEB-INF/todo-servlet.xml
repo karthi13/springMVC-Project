@@ -1,0 +1,53 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:mvc="http://www.springframework.org/schema/mvc"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+    http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd
+    http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd">
+
+    <context:component-scan base-package="org.EdurekaProject" />
+	<mvc:resources mapping="/webjars/**" location="/webjars/"/>
+    <mvc:annotation-driven />
+    <bean
+        class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix">
+            <value>/WEB-INF/views/</value>
+        </property>
+        <property name="suffix">
+            <value>.jsp</value>
+        </property>
+    </bean>
+    
+	<bean id="datasource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+    	<property name="driverClassName" value="com.mysql.jdbc.Driver"></property>
+    	<property name="url" value="jdbc:mysql://localhost/db"></property>
+    	<property name="username" value="root"></property>
+    	<property name="password" value="1234"></property>  	
+    </bean>
+    
+ <!--    <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+    	<property name="dataSource" ref="datasource"></property>
+    </bean> -->
+    
+    <bean id="loginDAOImpl" class="org.EdurekaProject.dao.impl.LoginDAOImpl">
+		<property name="dataSource" ref="datasource"></property>
+	</bean>
+	
+	 <bean id="userAccountDAOImpl" class="org.EdurekaProject.dao.impl.UserAccountDAOImpl">
+		<property name="dataSource" ref="datasource"></property>
+	</bean>
+	
+	<bean id="fundsTransferImpl" class="org.EdurekaProject.dao.impl.FundsTransferImpl">
+		<property name="dataSource" ref="datasource"></property>
+	</bean>
+    
+    <bean id="transcationService" class="org.EdurekaProject.dao.impl.TranscationService">
+		<property name="dataSource" ref="datasource"></property>
+	</bean>
+	
+	<bean id="creditCardAuthentication" class="org.EdurekaProject.dao.impl.CreditCardAuthentication">
+		<property name="dataSource" ref="datasource"></property>
+	</bean>
+    
+</beans>
