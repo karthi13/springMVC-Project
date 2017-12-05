@@ -14,8 +14,7 @@ public class User {
 	@Size(min = 5, max = 15, message = "Your password must be 5 - 15 characters.")
 	private String password;
 	public User() {
-		super();
-		// TODO Auto-generated constructor stub
+
 	}
 	public String getUsername() {
 		return username;
